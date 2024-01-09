@@ -1,0 +1,23 @@
+python demo.py ctdet \
+        --dataset table \
+        --demo ../input_images/taobao \
+        --demo_name demo_taobao_wtw \
+        --debug 1 \
+        --arch dla_34  \
+        --K 3000 \
+        --MK 5000 \
+        --upper_left \
+        --tsfm_layers 4\
+        --stacking_layers 4 \
+        --gpus 0\
+        --wiz_2dpe \
+        --wiz_detect \
+        --wiz_stacking \
+        --convert_onnx 0 \
+        --vis_thresh_corner 0.3 \
+        --vis_thresh 0.2 \
+        --scores_thresh 0.2 \
+        --nms \
+        --demo_dir ../visualization_taobao_wtw/ \
+        --load_model ../dir_of_ckpt/ckpt_wtw/model_best.pth \
+        --load_processor ../dir_of_ckpt/ckpt_wtw/processor_best.pth

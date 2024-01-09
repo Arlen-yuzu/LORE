@@ -1,0 +1,23 @@
+python testtb.py ctdet_mid \
+        --dataset table_mid \
+        --demo ../input_images/tb_real \
+        --demo_name demo_tb_real \
+        --debug 1 \
+        --arch resfpnhalf_18  \
+        --K 3000 \
+        --MK 5000 \
+        --upper_left \
+        --tsfm_layers 4\
+        --stacking_layers 4 \
+        --gpus 0\
+        --wiz_2dpe \
+        --wiz_detect \
+        --wiz_stacking \
+        --convert_onnx 0 \
+        --vis_thresh_corner 0.3 \
+        --vis_thresh 0.2 \
+        --scores_thresh 0.2 \
+        --nms \
+        --demo_dir ../visualization_tb_real/ \
+        --load_model ../dir_of_ckpt/ckpt_wireless/model_best.pth \
+        --load_processor ../dir_of_ckpt/ckpt_wireless/processor_best.pth

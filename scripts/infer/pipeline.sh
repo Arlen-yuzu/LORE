@@ -1,0 +1,25 @@
+export CUDA_VISIBLE_DEVICES="4,5" 
+python pipeline.py ctdet_mid \
+        --dataset table_mid \
+        --demo ../input_images/tb_real \
+        --demo_name demo_pipeline2 \
+        --debug 1 \
+        --arch resfpnhalf_18  \
+        --K 3000 \
+        --MK 5000 \
+        --upper_left \
+        --tsfm_layers 4\
+        --stacking_layers 4 \
+        --gpus 0\
+        --wiz_2dpe \
+        --wiz_detect \
+        --wiz_stacking \
+        --convert_onnx 0 \
+        --vis_thresh_corner 0.3 \
+        --vis_thresh 0.2 \
+        --scores_thresh 0.2 \
+        --nms \
+        --kvobj \
+        --demo_dir ../visualization_pipeline2/ \
+        --load_model ../dir_of_ckpt/ckpt_gt/model_100.pth \
+        --load_processor ../dir_of_ckpt/ckpt_wireless/processor_best.pth

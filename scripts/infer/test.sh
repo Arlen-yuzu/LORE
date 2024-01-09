@@ -1,0 +1,26 @@
+export CUDA_VISIBLE_DEVICES="4, 5" 
+python demo.py ctdet_mid \
+        --dataset table_mid \
+        --demo ../data/reallabel/images/ \
+        --demo_name realdata_test \
+        --debug 1 \
+        --dataset_name reallabel \
+        --arch resfpnhalf_18  \
+        --K 3000 \
+        --MK 5000 \
+        --upper_left \
+        --tsfm_layers 4\
+        --stacking_layers 4 \
+        --gpus 0\
+        --wiz_2dpe \
+        --wiz_detect \
+        --wiz_stacking \
+        --convert_onnx 0 \
+        --vis_thresh_corner 0.3 \
+        --vis_thresh 0.2 \
+        --scores_thresh 0.2 \
+        --nms \
+        --demo_dir ../visualization_metric9/ \
+        --anno_path ../data/reallabel/json/test_final4.json \
+        --load_model ../exp/ctdet_mid/train_syntable_ddp_1103/model_last.pth \
+        --load_processor ../exp/ctdet_mid/train_syntable_ddp_1103/processor_last.pth

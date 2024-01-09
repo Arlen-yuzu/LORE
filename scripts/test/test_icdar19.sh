@@ -1,0 +1,26 @@
+export CUDA_VISIBLE_DEVICES="0" 
+python tsr_test.py ctdet_mid \
+        --dataset table_mid \
+        --demo_name lore_icdar19 \
+        --dataset_name icdar19 \
+        --img_dir /shared/aia/alg/xyl/tsrdataset/model/lore/icdar19/image \
+        --anno_path /shared/aia/alg/xyl/tsrdataset/model/lore/icdar19/json/test.json \
+        --vis_dir ./visualization_icdar19/ \
+        --load_model /data/xuyilun/project/LORE/exp/ctdet_mid/train_icdar19/model_best.pth \
+        --load_processor /data/xuyilun/project/LORE/exp/ctdet_mid/train_icdar19/processor_best.pth \
+        --debug 1 \
+        --arch dla_34  \
+        --K 3000 \
+        --MK 5000 \
+        --upper_left \
+        --tsfm_layers 4 \
+        --stacking_layers 4 \
+        --gpus 0\
+        --wiz_2dpe \
+        --wiz_detect \
+        --wiz_stacking \
+        --convert_onnx 0 \
+        --vis_thresh_corner 0.3 \
+        --vis_thresh 0.2 \
+        --scores_thresh 0.2 \
+        --nms
