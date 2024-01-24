@@ -91,8 +91,8 @@ def main(opt):
   else:
     optimizer = torch.optim.Adam(processor.parameters(), lr =opt.lr, betas= (0.9, 0.98), eps=1e-9)
   # scheduler = torch.optim.lr_scheduler.ExponentialLR(optimizer, 0.9, last_epoch=-1)
-  scheduler = torch.optim.lr_scheduler.MultiStepLR(optimizer, opt.lr_step, gamma=0.1, last_epoch=-1)
-  # scheduler = torch.optim.lr_scheduler.CosineAnnealingLR(optimizer, opt.num_epochs, eta_min=0, last_epoch=-1)
+  # scheduler = torch.optim.lr_scheduler.MultiStepLR(optimizer, opt.lr_step, gamma=0.1, last_epoch=-1)
+  scheduler = torch.optim.lr_scheduler.CosineAnnealingLR(optimizer, opt.num_epochs, eta_min=0, last_epoch=-1)
 
 
   Trainer = train_factory[opt.task]
@@ -104,7 +104,10 @@ def main(opt):
   ########################## 	DDP change 3  ##########################
   #处理Dataloader DDP sampler修改
   train_dataset = Dataset(opt, 'train')
-  val_dataset = Dataset(opt, 'test')
+  if not os.path.exists(os.path.join(opt.anno_path, 'test.json')):
+    val_dataset = Dataset(opt, 'val')
+  else:
+    val_dataset = Dataset(opt, 'test')
   train_sampler = torch.utils.data.distributed.DistributedSampler(train_dataset, shuffle=True)
   val_sampler = torch.utils.data.distributed.DistributedSampler(val_dataset, shuffle=False)
   #torch.utils.data.DataLoader中的shuffle应该设置为False（默认），因为打乱的任务交给了sampler

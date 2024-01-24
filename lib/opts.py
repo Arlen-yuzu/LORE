@@ -44,7 +44,9 @@ class opts(object):
                                   'or "webcam"')   
     self.parser.add_argument('--vis_dir', default='../demo/', 
                              help='path to visual output. '
-                                  'or "webcam"')      
+                                  'or "webcam"')
+    self.parser.add_argument('--root_dir', default='../demo/', 
+                             help='path to save anything in a exp')
     self.parser.add_argument('--demo_output', default='', 
                              help='path to image/ image folders/ video. '
                                   'or "webcam"')                              
@@ -365,7 +367,7 @@ class opts(object):
       opt.chunk_sizes.append(slave_chunk_size)
     print('training chunk_sizes:', opt.chunk_sizes)
 
-    opt.root_dir = os.path.join(os.path.dirname(__file__), '..')
+    # opt.root_dir = os.path.join(os.path.dirname(__file__), '..')
     opt.data_dir = os.path.join(opt.root_dir, 'data')
     opt.exp_dir = os.path.join(opt.root_dir, 'exp', opt.task)
     opt.save_dir = os.path.join(opt.exp_dir, opt.exp_id)

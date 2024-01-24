@@ -1,0 +1,27 @@
+export CUDA_VISIBLE_DEVICES="7" 
+python tsr_test.py ctdet_mid \
+        --dataset table_mid \
+        --demo_name lore_taobao \
+        --dataset_name taobao \
+        --img_dir /shared/aia/alg/xyl/tsrdataset/unify/taobao/image \
+        --anno_path /shared/aia/alg/xyl/tsrdataset/model/lore/taobao/json/test.json \
+        --vis_dir ./visualization_taobao/ \
+        --load_model /data/xuyilun/project/LORE/dir_of_ckpt/ckpt_wireless/model_best.pth \
+        --load_processor /data/xuyilun/project/LORE/dir_of_ckpt/ckpt_wireless/processor_best.pth \
+        --debug 1 \
+        --class_num 1 \
+        --arch resfpnhalf_18   \
+        --K 3000 \
+        --MK 5000 \
+        --tsfm_layers 4 \
+        --stacking_layers 4 \
+        --gpus 0 \
+        --wiz_4ps \
+        --wiz_2dpe \
+        --wiz_detect \
+        --wiz_stacking \
+        --convert_onnx 0 \
+        --vis_thresh_corner 0.3 \
+        --vis_thresh 0.2 \
+        --scores_thresh 0.2 \
+        --nms

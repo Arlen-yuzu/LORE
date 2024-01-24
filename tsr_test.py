@@ -43,6 +43,8 @@ def demo(opt):
   for i in range(len(images)):
     img_id = images[i]
     file_name = coco_data.loadImgs(ids=[img_id])[0]['file_name']
+    if opt.dataset_name == 'sym':
+      htmlstr = coco_data.loadImgs(ids=[img_id])[0]['htmlstr']
 
     ann_ids = coco_data.getAnnIds(imgIds=[img_id])
     anns = coco_data.loadAnns(ids=ann_ids)
@@ -74,17 +76,20 @@ def demo(opt):
     #   continue
     
     image_anno = image_annos[i]
-    if not opt.wiz_detect:
-      # 用于只衡量logic regression的效果
-      ret = detector.run(opt, image_name, image_anno)
-    else:
-      ret = detector.run(opt, image_name)
+    try:
+      if not opt.wiz_detect:
+        # 用于只衡量logic regression的效果
+        ret = detector.run(opt, image_name, image_anno)
+      else:
+        ret = detector.run(opt, image_name)
+    except:
+      continue
 
     spatial = ret['spatial'] # [num_valid, 8]
     logi = ret['logi'] # [num_valid, 4]
     cell_cls = ret['cls'] # [num_valid]
     
-    if opt.dataset_name == 'pubtabnet':
+    if opt.dataset_name == 'pubtabnet' or opt.dataset_name == 'sym':
       pred_html = res2html_teds(spatial, logi, cell_cls) # str
     
     image = cv2.imread(image_name)
@@ -101,7 +106,7 @@ def demo(opt):
     pred_dict['pred_bbox'] = np.array(spatial)
     pred_dict['pred_lloc'] = np.array(logi)
     pred_dict['pred_cls'] = cell_cls
-    if opt.dataset_name == 'pubtabnet':
+    if opt.dataset_name == 'pubtabnet' or opt.dataset_name == 'sym':
       pred_dict['pred_html'] = pred_html
     
     gt_dict = dict()
@@ -110,8 +115,14 @@ def demo(opt):
     gt_dict['gt_cls'] = [image_anno[j]['category_id'] for j in range(len(image_anno))]
     if opt.dataset_name == 'pubtabnet':
         gt_dict['gt_html'] = teds_ann[i]
+    if opt.dataset_name == 'sym':
+        gt_dict['gt_html'] = htmlstr
     
     evaluator.run_one_step(pred_dict, gt_dict)
+    
+    # print(pred_dict['pred_html'])
+    # print(gt_dict['gt_html'])
+    # break
     
     # # debug
     # if image_name == 'cTDaR_t00748_2.jpg':

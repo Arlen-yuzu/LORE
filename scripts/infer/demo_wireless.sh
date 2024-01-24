@@ -1,7 +1,7 @@
 python demo.py ctdet_mid \
         --dataset table_mid \
-        --demo ../input_images/wireless \
-        --demo_name demo_wireless \
+        --demo /data/xuyilun/project/hardreal \
+        --demo_name hard_real \
         --debug 1 \
         --arch resfpnhalf_18  \
         --K 3000 \
@@ -18,6 +18,6 @@ python demo.py ctdet_mid \
         --vis_thresh 0.2 \
         --scores_thresh 0.2 \
         --nms \
-        --demo_dir ../visualization_wireless/ \
+        --demo_dir ../visualization_hard_real/ \
         --load_model ../dir_of_ckpt/ckpt_wireless/model_best.pth \
         --load_processor ../dir_of_ckpt/ckpt_wireless/processor_best.pth

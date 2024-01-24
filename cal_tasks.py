@@ -6,5 +6,7 @@ model_dataset_info = {
     'tablegraph24k': {'cal_tasks': ['cd', 'tsr_ll', 'tsr_rc'], 'match': 'a2a'},
     'comfintab': {'cal_tasks': ['cd', 'tsr_ll', 'tsr_rc', 'ctc'], 'match': 'a2a'},
     'pub1m': {'cal_tasks': ['cd', 'tsr_ll', 'tsr_rc'], 'match': 'a2a'},
-    'scitsr': {'cal_tasks': ['cd', 'tsr_ll', 'tsr_rc'], 'match': 't2t'}
+    'scitsr': {'cal_tasks': ['cd', 'tsr_ll', 'tsr_rc'], 'match': 't2t'},
+    'sym': {'cal_tasks': ['cd', 'tsr_ll', 'tsr_rc', 'tsr_teds'], 'match': 't2t'},
+    'taobao': {'cal_tasks': ['cd', 'tsr_ll', 'tsr_rc'], 'match': 't2t'}
 }
